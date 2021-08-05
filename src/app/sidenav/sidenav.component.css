@@ -1,0 +1,23 @@
+  mat-sidenav{
+      margin: 16px;
+      width: 200px;
+      border-right: none;
+      background-color: rgb(6, 87, 168);
+      color: white;
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+      font-size: 15px;
+  }
+
+  mat-drawer-container{
+      height: calc(100vh - 65px);
+  }
+
+  .sidenav-btn{
+    background:rgb(13, 222, 230);
+    /* padding: 16px; */
+    margin-bottom: 16px;
+    margin-top: 16px;
+    width: 150px;
+  }  

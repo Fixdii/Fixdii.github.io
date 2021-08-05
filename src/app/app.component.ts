@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ServicesService } from './services.service'
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'FlikrApi';
+  
+  constructor(private httpService: ServicesService){}
+
+  key: string = 'Bus';
+
+  ngOnInit() {
+  
+    // this.httpService.getImages(this.key).subscribe((data: any) =>{
+    //  console.log(data);
+    // }) 
+  }
 }

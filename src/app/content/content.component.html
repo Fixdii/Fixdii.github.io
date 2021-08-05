@@ -1,0 +1,30 @@
+<div class="content">
+  <input
+    type="search"
+    class="form-control"
+    (change)="search($event)"
+    placeholder="Search images"
+    [(ngModel)]="searchValue"
+  />
+</div>
+
+<div class="paginator">
+  <mat-paginator
+    [length]="length"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    aria-label="Select page"
+    (page)="paginator($event)"
+  ></mat-paginator>
+</div>
+
+<div class="row">
+  <div class="col-sm-12 col-md-6 col-lg-3 p-3" *ngFor="let image of images">
+    <div class="card">
+      <a class="bred" href="{{ image.url }}_b.jpg">
+        <img src="{{ image.url }}_m.jpg" title="{{ image.title }}" />
+      </a>
+      <button class="btn save" (click)="save($event)">save</button>
+    </div>
+  </div>
+</div>

@@ -31,15 +31,12 @@ export class ContentComponent implements OnInit {
         .toPromise()
         .then((res) => {
           this.images = res;
-          console.log(res);
         });
     }
   }
 
   paginator(event: any) {
     this.page = event.pageIndex + 1;
-    console.log(event.pageIndex + 1);
-
     if (this.keyword && this.keyword.length > 0) {
       this.servicesService
         .getImages(this.keyword, this.page)
@@ -81,14 +78,9 @@ export class ContentComponent implements OnInit {
     }
   }
 
-  showSavedPhoto() {
-    console.log(this.searchValue);
-    
+  showSavedPhoto() {    
     this.searchValue = '';
-    console.log(this.searchValue);
-
     const returnUrl: any = localStorage.getItem('url');
-    console.log(JSON.parse(returnUrl));
 
     if (JSON.parse(returnUrl)) {
       this.savedImages = JSON.parse(returnUrl);

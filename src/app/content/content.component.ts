@@ -53,12 +53,13 @@ export class ContentComponent implements OnInit {
     const url = parent.querySelector('img').getAttribute('src');
 
     if (target.textContent == 'save') {
-      for (const obj of this.savedImages) {
+      this.savedImages.map((obj) => {
         if (obj.url === url) {
           alert('This photo has already been added!');
           return;
         }
-      }
+      });
+
       this.savedImages.push({ url: url });
       localStorage.setItem('url', JSON.stringify(this.savedImages));
     } else {
@@ -67,7 +68,7 @@ export class ContentComponent implements OnInit {
   }
 
   delete(url: string) {
-    for (const obj of this.savedImages) {
+    this.savedImages.map((obj) => {
       if (obj.url === url.substr(0, url.length - 6)) {
         let index = this.savedImages.indexOf(obj);
         this.savedImages.splice(index, 1);
@@ -75,10 +76,10 @@ export class ContentComponent implements OnInit {
         this.servicesService.eventSubject.next('showSaved');
         this.cd.detectChanges();
       }
-    }
+    });
   }
 
-  showSavedPhoto() {    
+  showSavedPhoto() {
     this.searchValue = '';
     const returnUrl: any = localStorage.getItem('url');
 

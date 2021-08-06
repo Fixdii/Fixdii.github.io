@@ -53,13 +53,12 @@ export class ContentComponent implements OnInit {
     const url = parent.querySelector('img').getAttribute('src');
 
     if (target.textContent == 'save') {
-      this.savedImages.map((obj) => {
-        if (obj.url === url) {
-          alert('This photo has already been added!');
-          return;
-        }
-      });
-
+      // this.savedImages.map((obj) => {
+      //   if (obj.url === url) {
+      //     alert('This photo has already been added!');
+      //     return;
+      //   }
+      // })
       this.savedImages.push({ url: url });
       localStorage.setItem('url', JSON.stringify(this.savedImages));
     } else {

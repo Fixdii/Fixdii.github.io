@@ -37,6 +37,8 @@ export class ContentComponent implements OnInit {
 
   paginator(event: any) {
     this.page = event.pageIndex + 1;
+    console.log(event.pageIndex + 1);
+
     if (this.keyword && this.keyword.length > 0) {
       this.servicesService
         .getImages(this.keyword, this.page)
@@ -51,14 +53,16 @@ export class ContentComponent implements OnInit {
     const target = event.target;
     const parent = target.closest('.card');
     const url = parent.querySelector('img').getAttribute('src');
+    console.log(this.savedImages);
+    console.log(url);
 
     if (target.textContent == 'save') {
-      this.savedImages.map((obj) => {
+      for (let obj of this.savedImages) {
         if (obj.url === url) {
           alert('This photo has already been added!');
           return;
         }
-      })
+      }
       this.savedImages.push({ url: url });
       localStorage.setItem('url', JSON.stringify(this.savedImages));
     } else {
@@ -67,7 +71,7 @@ export class ContentComponent implements OnInit {
   }
 
   delete(url: string) {
-    this.savedImages.map((obj) => {
+    for (let obj of this.savedImages) {
       if (obj.url === url.substr(0, url.length - 6)) {
         let index = this.savedImages.indexOf(obj);
         this.savedImages.splice(index, 1);
@@ -75,7 +79,7 @@ export class ContentComponent implements OnInit {
         this.servicesService.eventSubject.next('showSaved');
         this.cd.detectChanges();
       }
-    });
+    }
   }
 
   showSavedPhoto() {
@@ -85,6 +89,7 @@ export class ContentComponent implements OnInit {
     if (JSON.parse(returnUrl)) {
       this.savedImages = JSON.parse(returnUrl);
     }
+
     this.images = JSON.parse(returnUrl);
     this.cd.detectChanges();
 
@@ -97,7 +102,7 @@ export class ContentComponent implements OnInit {
 
   ngOnInit(): void {
     const returnUrl: any = localStorage.getItem('url');
-    this.savedImages = JSON.parse(returnUrl);
+    if (JSON.parse(returnUrl)) this.savedImages = JSON.parse(returnUrl);
 
     this.servicesService.eventSubject.subscribe((event) => {
       this.showSavedPhoto();

@@ -53,30 +53,30 @@ export class ContentComponent implements OnInit {
     const url = parent.querySelector('img').getAttribute('src');
 
     if (target.textContent == 'save') {
-      // this.savedImages.map((obj) => {
-      //   if (obj.url === url) {
-      //     alert('This photo has already been added!');
-      //     return;
-      //   }
-      // })
+      this.savedImages.map((obj) => {
+        if (obj.url === url) {
+          alert('This photo has already been added!');
+          return;
+        }
+      })
       this.savedImages.push({ url: url });
       localStorage.setItem('url', JSON.stringify(this.savedImages));
     } else {
-      //this.delete(url);
+      this.delete(url);
     }
   }
 
-  // delete(url: string) {
-  //   this.savedImages.map((obj) => {
-  //     if (obj.url === url.substr(0, url.length - 6)) {
-  //       let index = this.savedImages.indexOf(obj);
-  //       this.savedImages.splice(index, 1);
-  //       localStorage.setItem('url', JSON.stringify(this.savedImages));
-  //       this.servicesService.eventSubject.next('showSaved');
-  //       this.cd.detectChanges();
-  //     }
-  //   });
-  // }
+  delete(url: string) {
+    this.savedImages.map((obj) => {
+      if (obj.url === url.substr(0, url.length - 6)) {
+        let index = this.savedImages.indexOf(obj);
+        this.savedImages.splice(index, 1);
+        localStorage.setItem('url', JSON.stringify(this.savedImages));
+        this.servicesService.eventSubject.next('showSaved');
+        this.cd.detectChanges();
+      }
+    });
+  }
 
   showSavedPhoto() {
     this.searchValue = '';

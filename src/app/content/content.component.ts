@@ -82,26 +82,28 @@ export class ContentComponent implements OnInit {
 
   showSavedPhoto() {
     this.searchValue = '';
-    const returnUrl: any = localStorage.getItem('url');
 
-    if (JSON.parse(returnUrl)) {
-      this.savedImages = JSON.parse(returnUrl);
-    }
-
+    const returnUrl = this.serviceLocalStorage();
     this.images = JSON.parse(returnUrl);
     this.cd.detectChanges();
     let buttonSaved = document.querySelectorAll('.save');
     let buttons = Array.from(buttonSaved);
+
     for (const btn of buttons) {
       btn.textContent = 'delete';
     }
   }
 
-  ngOnInit(): void {
-    const returnUrl: any = localStorage.getItem('url');
+  serviceLocalStorage(){    
+    const returnUrl: any = localStorage.getItem('url');   
     if (JSON.parse(returnUrl)){
       this.savedImages = JSON.parse(returnUrl);
-    } 
+    }
+    return returnUrl;
+  } 
+
+  ngOnInit(): void {
+    this.serviceLocalStorage();
     this.servicesService.eventSubject.subscribe((event) => {
       this.showSavedPhoto();
     });

@@ -101,9 +101,7 @@ export class ContentComponent implements OnInit {
        return [];
     }
 
-    this.savedImages = value || [];    
-    console.log(this.savedImages);
-    
+    this.savedImages = value || [];        
     return value || [];
   } 
 

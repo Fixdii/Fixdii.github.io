@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { url } from 'inspector';
+// import { url } from 'inspector';
 import { ServicesService } from '../services.service';
 
 @Component({
@@ -38,7 +38,6 @@ export class ContentComponent implements OnInit {
 
   paginator(event: any) {
     this.page = event.pageIndex + 1;
-    console.log(event.pageIndex + 1);
 
     if (this.keyword && this.keyword.length > 0) {
       this.servicesService
@@ -82,7 +81,7 @@ export class ContentComponent implements OnInit {
   }
 
   showSavedPhoto() {
-    this.searchValue = '';
+    this.searchValue = '';    
     this.images = this.serviceLocalStorage();
     this.cd.detectChanges();
     let buttonSaved = document.querySelectorAll('.save');
@@ -95,14 +94,14 @@ export class ContentComponent implements OnInit {
 
   serviceLocalStorage(){    
     const returnUrl: any = localStorage.getItem('url');   
-    const value = JSON.parse(returnUrl);
+    const value = JSON.parse(returnUrl);    
 
-    if(!value || returnUrl){
+    if(!value || !returnUrl){
        this.savedImages = [];
        return [];
     }
 
-    this.savedImages = value || [];
+    this.savedImages = value || [];    
     return value || [];
   } 
 

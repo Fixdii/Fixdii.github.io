@@ -53,8 +53,6 @@ export class ContentComponent implements OnInit {
     const target = event.target;
     const parent = target.closest('.card');
     const url = parent.querySelector('img').getAttribute('src');
-    console.log(this.savedImages);
-    console.log(url);
 
     if (target.textContent == 'save') {
       for (let obj of this.savedImages) {
@@ -92,7 +90,6 @@ export class ContentComponent implements OnInit {
 
     this.images = JSON.parse(returnUrl);
     this.cd.detectChanges();
-
     let buttonSaved = document.querySelectorAll('.save');
     let buttons = Array.from(buttonSaved);
     for (const btn of buttons) {
@@ -102,8 +99,9 @@ export class ContentComponent implements OnInit {
 
   ngOnInit(): void {
     const returnUrl: any = localStorage.getItem('url');
-    if (JSON.parse(returnUrl)) this.savedImages = JSON.parse(returnUrl);
-
+    if (JSON.parse(returnUrl)){
+      this.savedImages = JSON.parse(returnUrl);
+    } 
     this.servicesService.eventSubject.subscribe((event) => {
       this.showSavedPhoto();
     });
